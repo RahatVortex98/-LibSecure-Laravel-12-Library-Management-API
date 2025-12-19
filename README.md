@@ -1,4 +1,4 @@
-<h2>📚 LibSecure: Laravel 12 Library Management API</h2>
+![Untitled](https://github.com/user-attachments/assets/d9246567-67c7-4e96-bcb0-073eb3aaecae)<h2>📚 LibSecure: Laravel 12 Library Management API</h2>
 
 <h3 align='center'>🌐 Introduction To Api </h3>
 
@@ -54,9 +54,26 @@ commands for making the model, migration table, and factory,
          php artisan make:model Member -mf
 
          php artisan make:model Borrowing -mf
+Relationship between them:
 
-
+        Author → Book
+        Author has many Books
+        Book belongs to Author
         
+        Member → Borrowing
+        Member has many Borrowings
+        Borrowing belongs to Member
+        
+        Book → Borrowing
+        Book has many Borrowings
+        Borrowing belongs to Book
+
+Link: https://dbdiagram.io/
+
+<p align='center'> <img width="50%" src="https://github.com/user-attachments/assets/4a05624f-1612-418d-a969-95bb8f4bb63c" />
+
+</p>
+
 <h3 align="center">📍 API Endpoints</h3>
 
 ### 👤 Authors
