@@ -1,4 +1,4 @@
-![Untitled](https://github.com/user-attachments/assets/d9246567-67c7-4e96-bcb0-073eb3aaecae)<h2>📚 LibSecure: Laravel 12 Library Management API</h2>
+<h2>📚 LibSecure: Laravel 12 Library Management API</h2>
 
 <h3 align='center'>🌐 Introduction To Api </h3>
 
