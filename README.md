@@ -74,6 +74,25 @@ Link: https://dbdiagram.io/
 
 </p>
 
+<h3 align='center'>🎮 Setup Api Based Controller</h3>    
+
+Commands:
+
+         php artisan make:controller AuthorController --api
+
+         
+
+         | Without `--api`           | With `--api`             |
+        | ------------------------- | ------------------------ |
+        | create(), edit() included | create(), edit() removed |
+        | Used for web apps         | Used for REST APIs       |
+        | HTML forms                | JSON responses           |
+
+
+
+
+
+
 <h3 align="center">📍 API Endpoints</h3>
 
 ### 👤 Authors
