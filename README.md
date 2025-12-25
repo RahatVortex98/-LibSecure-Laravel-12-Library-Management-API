@@ -1,4 +1,4 @@
-<h2>📚 LibSecure: Laravel 12 Library Management API</h2>
+
 
 <h3 align='center'>🌐 Introduction To Api </h3>
 
@@ -83,14 +83,27 @@ Commands:
          
 
          | Without `--api`           | With `--api`             |
-        | ------------------------- | ------------------------ |
-        | create(), edit() included | create(), edit() removed |
-        | Used for web apps         | Used for REST APIs       |
-        | HTML forms                | JSON responses           |
+         | ------------------------- | ------------------------ |
+         | create(), edit() included | create(), edit() removed |
+         | Used for web apps         | Used for REST APIs       |
+         | HTML forms                | JSON responses           |
 
 
+<h3 align='center'>🛡️ Setup Sanctum and Setup</h3>  
 
+Commands:
 
+        php artisan install:api
+
+<p align='center'><img width="48%"  src="https://github.com/user-attachments/assets/db65acb5-11ae-4ef0-97c3-bc3608f82885" /></p>
+        
+- **under routes, there will be a file: routes->api.php**
+
+- **And in models user.php, add this->>**
+
+        use Laravel\Sanctum\HasApiTokens;
+  
+        use HasApiTokens;
 
 
 <h3 align="center">📍 API Endpoints</h3>
