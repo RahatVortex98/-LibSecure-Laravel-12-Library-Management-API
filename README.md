@@ -80,13 +80,58 @@ Commands:
 
          php artisan make:controller AuthorController --api
 
-         
+- **store() = handle request → validate → save → respond**
 
          | Without `--api`           | With `--api`             |
          | ------------------------- | ------------------------ |
          | create(), edit() included | create(), edit() removed |
          | Used for web apps         | Used for REST APIs       |
          | HTML forms                | JSON responses           |
+
+
+<h4>If you don't wanna use validation inside controller, then:</h4>
+
+- **Use a Form Request**
+command:
+
+        php artisan make:request StoreAuthorRequest
+in controller:
+
+            public function store(StoreAuthorRequest $request)
+        {
+            $author = Author::create($request->validated());
+    
+        return response()->json([
+            'author' => $author,
+            'message' => 'Author created successfully',
+        ], 201);
+        }
+
+and in Request/StoreAuthorRequest/ :
+
+        <?php
+    
+        namespace App\Http\Requests;
+        
+        use Illuminate\Foundation\Http\FormRequest;
+        
+        class StoreAuthorRequest extends FormRequest
+        {
+            public function authorize(): bool
+            {
+                return true; // allow request (change later if auth needed)
+            }
+    
+        public function rules(): array
+        {
+            return [
+                'name' => 'required|string|max:255',
+                'bio'  => 'nullable|string',
+            ];
+        }
+        }
+ 
+
 
 
 <h3 align='center'>🛡️ Setup Sanctum and Setup</h3>  
@@ -115,14 +160,71 @@ Commands:
 <h3 align="center">📮💼👮 Setup Postman </h3>
 
 - **Create new collection ->Blank collection(named it) -> Add folder**
-  <h4>Requests:</h4>
+
 <p align='center'><img width="48%"  src="https://github.com/user-attachments/assets/41648afc-420f-4384-846e-5f684c51eb91" />
  </p>
+  <h4>Requests:</h4>
+
   Auhtor:
 
-        http://127.0.0.1:8000/api/authors/   
+View all:(get)
+        
+        http://127.0.0.1:8000/api/authors/
+        
+Create:(post)
+
+        http://127.0.0.1:8000/api/authors/
 
 
+<h3 align="center">📦 Laravel Resources</h3>
+
+- **Laravel Resources (official name: API Resources) are a way to control how your models are converted to JSON in an API.
+They sit between your models and your JSON response.**
+
+- **Resources = how data is shown in API**
+
+commands:
+
+           php artisan make:resource AuthorResource
+        
+ - **INFO  Resource [D:\LibSecure\library-management-api\app\Http\Resources\AuthorResource.php] created successfully.**
+   
+   AuthorResource.php:
+
+           <?php
+
+            namespace App\Http\Resources;
+            
+            use Illuminate\Http\Request;
+            use Illuminate\Http\Resources\Json\JsonResource;
+            
+            class AuthorResource extends JsonResource
+            {
+                /**
+                 * Transform the resource into an array.
+                 *
+                 * @return array<string, mixed>
+                 */
+                public function toArray(Request $request): array
+                {
+                    return [
+                        'name'=>$this->name,
+                        'bio'=>$this->bio,
+                        'nationality'=>$this->nationality
+                    ];
+                }
+            }
+   
+Using it in Controller:
+
+            return new AuthorResource($author);
+
+Postman View:
+
+<p align='center'><img width="48%"  src="https://github.com/user-attachments/assets/02aba636-0ecf-413a-9d73-8127e4f0471f" />
+
+ </p>
+        
 
 <h3 align="center">📍 API Endpoints</h3>
 
