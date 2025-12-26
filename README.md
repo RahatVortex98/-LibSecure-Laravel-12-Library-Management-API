@@ -116,7 +116,8 @@ Commands:
 
 - **Create new collection ->Blank collection(named it) -> Add folder**
   <h4>Requests:</h4>
-
+<p align='center'><img width="48%"  src="https://github.com/user-attachments/assets/41648afc-420f-4384-846e-5f684c51eb91" />
+ </p>
   Auhtor:
 
         http://127.0.0.1:8000/api/authors/   
