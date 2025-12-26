@@ -99,11 +99,28 @@ Commands:
         
 - **under routes, there will be a file: routes->api.php**
 
-- **And in models user.php, add this->>**
+- **And in models user.php, add this->>- **
 
         use Laravel\Sanctum\HasApiTokens;
   
         use HasApiTokens;
+<h3 align="center"> જ⁀➴ Routes </h3>
+
+    Route::apiResource('authors',AuthorController::class);
+
+- **to check all route list: **
+
+      php artisan route:list
+  
+<h3 align="center">📮💼👮 Setup Postman </h3>
+
+- **Create new collection ->Blank collection(named it) -> Add folder**
+  <h4>Requests:</h4>
+
+  Auhtor:
+
+        http://127.0.0.1:8000/api/authors/   
+
 
 
 <h3 align="center">📍 API Endpoints</h3>
