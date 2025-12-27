@@ -177,8 +177,24 @@ Create:(post)
 Find by single :(get)
 
         http://127.0.0.1:8000/api/authors/1
+Update Author:(put|patch)
+
+        http://127.0.0.1:8000/api/authors/1
+Delete Author:(delete)
+
+        http://127.0.0.1:8000/api/authors/1
+
+<h4>Authors POSTMAN view</h4>
+🔹 List & Create
+<p align="center"> <img src="https://github.com/user-attachments/assets/fd5e76bf-c1d2-41c6-b478-b2eaecda80de" width="48%" /> <img src="https://github.com/user-attachments/assets/64f82600-1f43-42a4-b987-dd9d1dd26ce3" width="48%" /> </p>
+🔹 View & Update
+<p align="center"> <img src="https://github.com/user-attachments/assets/e25a3c22-04a2-4edb-baf8-d5b6f9b7ff51" width="48%" /> <img src="https://github.com/user-attachments/assets/433dbe24-fdca-4785-a947-3307c47a3ada" width="48%" /> </p>
+🔹 Delete
+<p align="center"> <img src="https://github.com/user-attachments/assets/1dc68108-a4e8-46d1-937c-2da79e3c586f" width="60%" /> </p>
 
 
+
+        
 
 <h3 align="center">📦 Laravel Resources</h3>
 
