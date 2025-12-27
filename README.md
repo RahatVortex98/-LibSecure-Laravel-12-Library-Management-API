@@ -174,6 +174,10 @@ View all:(get)
 Create:(post)
 
         http://127.0.0.1:8000/api/authors/
+Find by single :(get)
+
+        http://127.0.0.1:8000/api/authors/1
+
 
 
 <h3 align="center">📦 Laravel Resources</h3>
@@ -211,6 +215,9 @@ commands:
                         'name'=>$this->name,
                         'bio'=>$this->bio,
                         'nationality'=>$this->nationality
+   
+                         //relationship between books and author:
+                        'books' => $this->whenCounted('books'),  
                     ];
                 }
             }
