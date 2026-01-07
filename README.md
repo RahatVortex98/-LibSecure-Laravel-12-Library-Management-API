@@ -91,6 +91,8 @@ Commands:
 
 <h4>If you don't wanna use validation inside controller, then:</h4>
 
+- **Author Controller**
+
 - **Use a Form Request**
 command:
 
@@ -130,8 +132,6 @@ and in Request/StoreAuthorRequest/ :
             ];
         }
         }
- 
-
 
 
 <h3 align='center'>🛡️ Setup Sanctum and Setup</h3>  
@@ -208,7 +208,8 @@ commands:
            php artisan make:resource AuthorResource
         
  - **INFO  Resource [D:\LibSecure\library-management-api\app\Http\Resources\AuthorResource.php] created successfully.**
-   
+
+
    AuthorResource.php:
 
            <?php
@@ -247,8 +248,42 @@ Postman View:
 <p align='center'><img width="48%"  src="https://github.com/user-attachments/assets/02aba636-0ecf-413a-9d73-8127e4f0471f" />
 
  </p>
-        
 
+
+<h3 align="center"> ✅ Books,Members,Borrowing Contoller and steps</h3>
+
+
+<h3> 📖Books</h3>
+
+- **Book Controller**
+  
+      php artisan make:controller BookController --api
+
+- **Book Validation**
+
+      php artisan make:request StoreBookRequest
+
+- **INFO  Request [D:\LibSecure\library-management-api\app\Http\Requests\StoreBookRequest.php] created successfully.**
+
+- **Book Resource**
+
+      php artisan make:resource BookResource
+  
+- **INFO  Resource [D:\LibSecure\library-management-api\app\Http\Resources\BookResource.php] created successfully.**
+
+
+- **Route->api.php**
+
+
+      Route::apiResource('books',BookController::class);
+
+- **Postman View:**
+
+You must add:
+
+    Headers->accept & application/json
+
+    
 <h3 align="center">📍 API Endpoints</h3>
 
 ### 👤 Authors
