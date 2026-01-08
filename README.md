@@ -184,13 +184,8 @@ Delete Author:(delete)
 
         http://127.0.0.1:8000/api/authors/1
 
-<h4>Authors POSTMAN view</h4>
-🔹 List & Create
-<p align="center"> <img src="https://github.com/user-attachments/assets/fd5e76bf-c1d2-41c6-b478-b2eaecda80de" width="48%" /> <img src="https://github.com/user-attachments/assets/64f82600-1f43-42a4-b987-dd9d1dd26ce3" width="48%" /> </p>
-🔹 View & Update
-<p align="center"> <img src="https://github.com/user-attachments/assets/e25a3c22-04a2-4edb-baf8-d5b6f9b7ff51" width="48%" /> <img src="https://github.com/user-attachments/assets/433dbe24-fdca-4785-a947-3307c47a3ada" width="48%" /> </p>
-🔹 Delete
-<p align="center"> <img src="https://github.com/user-attachments/assets/1dc68108-a4e8-46d1-937c-2da79e3c586f" width="60%" /> </p>
+✍️ Authors API – Postman View
+<table> <tr> <td align="center"><b>List Authors</b></td> <td align="center"><b>Create Author</b></td> </tr> <tr> <td> <img src="https://github.com/user-attachments/assets/fd5e76bf-c1d2-41c6-b478-b2eaecda80de" width="450"/> </td> <td> <img src="https://github.com/user-attachments/assets/64f82600-1f43-42a4-b987-dd9d1dd26ce3" width="450"/> </td> </tr> <tr> <td align="center"><b>Get Author By ID</b></td> <td align="center"><b>Update Author</b></td> </tr> <tr> <td> <img src="https://github.com/user-attachments/assets/e25a3c22-04a2-4edb-baf8-d5b6f9b7ff51" width="450"/> </td> <td> <img src="https://github.com/user-attachments/assets/433dbe24-fdca-4785-a947-3307c47a3ada" width="450"/> </td> </tr> <tr> <td align="center" colspan="2"><b>Delete Author</b></td> </tr> <tr> <td colspan="2" align="center"> <img src="https://github.com/user-attachments/assets/1dc68108-a4e8-46d1-937c-2da79e3c586f" width="500"/> </td> </tr> </table>
 
 
 
@@ -282,8 +277,97 @@ Postman View:
 You must add:
 
     Headers->accept & application/json
-
     
+🔗 API Endpoints
+📘 Books API
+
+    | Method      | Description       | Endpoint                               |
+    | ----------- | ----------------- | -------------------------------------- |
+    | GET         | Get all books     | `http://127.0.0.1:8000/api/books`      |
+    | POST        | Create a new book | `http://127.0.0.1:8000/api/books`      |
+    | GET         | Get book by ID    | `http://127.0.0.1:8000/api/books/{id}` |
+    | PUT / PATCH | Update book       | `http://127.0.0.1:8000/api/books/{id}` |
+    | DELETE      | Delete book       | `http://127.0.0.1:8000/api/books/{id}` |
+
+
+
+## 📸 Postman API Screenshots
+
+<table>
+<tr>
+<td align="center"><b>Create Book</b></td>
+<td align="center"><b>Get All Books</b></td>
+</tr>
+<tr>
+<td><img src="https://github.com/user-attachments/assets/2f743208-861f-472c-9088-9db62c790e49" width="450"/></td>
+<td><img src="https://github.com/user-attachments/assets/3c5a0224-b5c4-4897-8586-cca826ff3cbb" width="450"/></td>
+</tr>
+
+<tr>
+<td align="center"><b>Get Book By ID</b></td>
+<td align="center"><b>Update Book</b></td>
+</tr>
+<tr>
+<td><img src="https://github.com/user-attachments/assets/31d34348-0b89-46b0-915a-768518a430e4" width="450"/></td>
+<td><img src="https://github.com/user-attachments/assets/d9eb0c75-6653-4527-83cb-3a45eb61d241" width="450"/></td>
+</tr>
+
+<tr>
+<td align="center" colspan="2"><b>Delete Book</b></td>
+</tr>
+<tr>
+<td colspan="2" align="center">
+<img src="https://github.com/user-attachments/assets/7de294df-f2f8-4693-aebd-06dbcf770c00" width="500"/>
+</td>
+</tr>
+</table>
+
+
+<h3>👥 Members</h3>
+
+- **Members Controller**
+  
+      php artisan make:controller MemberController --api
+
+- **Member Validation**
+
+      php artisan make:request StoreMemberRequest
+
+- **INFO  Request [D:\LibSecure\library-management-api\app\Http\Requests\StoreMemberRequest.php] created successfully.**
+
+- **Member Resource**
+
+      php artisan make:resource MemberResource
+  
+- **INFO  Resource [D:\LibSecure\library-management-api\app\Http\Resources\MemberResource.php] created successfully.**   
+
+- **Route->api.php**
+
+
+      Route::apiResource('members',MemberController::class);
+
+
+
+🔗 API Endpoints
+Members API
+
+    | Method      | Description       | Endpoint                               |
+    | ----------- | ----------------- | -------------------------------------- |
+    | GET         | Get all books     | `http://127.0.0.1:8000/api/members`      |
+    | POST        | Create a new book | `http://127.0.0.1:8000/api/members`      |
+    | GET         | Get book by ID    | `http://127.0.0.1:8000/api/members/{id}` |
+    | PUT / PATCH | Update book       | `http://127.0.0.1:8000/api/members/{id}` |
+    | DELETE      | Delete book       | `http://127.0.0.1:8000/api/members/{id}` |
+
+
+
+👥 Members API – Postman Preview
+<table> <tr> <td align="center"><b>Create Member</b></td> <td align="center"><b>Get All Members</b></td> </tr> <tr> <td> <img src="https://github.com/user-attachments/assets/6b3c32d0-dcb8-458e-a617-8c981bb9caff" width="450"/> </td> <td> <img src="https://github.com/user-attachments/assets/982996bc-597a-41c7-959e-d11f717d8c58" width="450"/> </td> </tr> <tr> <td align="center"><b>Get Member By ID</b></td> <td align="center"><b>Update Member</b></td> </tr> <tr> <td> <img src="https://github.com/user-attachments/assets/63ace6a4-09d3-41cd-8f37-6f524f26f1a5" width="450"/> </td> <td> <img src="https://github.com/user-attachments/assets/953cfcc7-e7fe-460f-9b38-e33992677c63" width="450"/> </td> </tr> <tr> <td align="center" colspan="2"><b>Delete Member</b></td> </tr> <tr> <td colspan="2" align="center"> <img src="https://github.com/user-attachments/assets/14e570c1-6b17-477c-a3de-413683112ba1" width="500"/> </td> </tr> </table>
+
+
+
+
+  
 <h3 align="center">📍 API Endpoints</h3>
 
 ### 👤 Authors
