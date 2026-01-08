@@ -63,4 +63,10 @@ class Book extends Model
             }
         }
 
+        public function isAvailable(): bool
+            {
+                return $this->available_copies > 0 && $this->status === 'available';
+            }
+
+
 }
