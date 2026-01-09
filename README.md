@@ -279,7 +279,7 @@ You must add:
     Headers->accept & application/json
     
 🔗 API Endpoints
-📘 Books API
+- **📘 Books API**
 
     | Method      | Description       | Endpoint                               |
     | ----------- | ----------------- | -------------------------------------- |
@@ -349,7 +349,7 @@ You must add:
 
 
 🔗 API Endpoints
-Members API
+- **👥Members API**
 
     | Method      | Description       | Endpoint                               |
     | ----------- | ----------------- | -------------------------------------- |
@@ -361,13 +361,60 @@ Members API
 
 
 
-👥 Members API – Postman Preview
+👥 Members API 
+– Postman Preview
 <table> <tr> <td align="center"><b>Create Member</b></td> <td align="center"><b>Get All Members</b></td> </tr> <tr> <td> <img src="https://github.com/user-attachments/assets/6b3c32d0-dcb8-458e-a617-8c981bb9caff" width="450"/> </td> <td> <img src="https://github.com/user-attachments/assets/982996bc-597a-41c7-959e-d11f717d8c58" width="450"/> </td> </tr> <tr> <td align="center"><b>Get Member By ID</b></td> <td align="center"><b>Update Member</b></td> </tr> <tr> <td> <img src="https://github.com/user-attachments/assets/63ace6a4-09d3-41cd-8f37-6f524f26f1a5" width="450"/> </td> <td> <img src="https://github.com/user-attachments/assets/953cfcc7-e7fe-460f-9b38-e33992677c63" width="450"/> </td> </tr> <tr> <td align="center" colspan="2"><b>Delete Member</b></td> </tr> <tr> <td colspan="2" align="center"> <img src="https://github.com/user-attachments/assets/14e570c1-6b17-477c-a3de-413683112ba1" width="500"/> </td> </tr> </table>
 
+<h3>🤝 Borrowings</h3>
 
+- **Borrowings Controller**
 
+      php artisan make:controller BorrowingController --api
 
+- **Borrowings  Validation(For Update Controller)**
+
+      php artisan make:request StoreBorrowingRequest
+    
+- **INFO  Request [D:\LibSecure\library-management-api\app\Http\Requests\StoreBorrowingRequest.php] created successfully.**
+
+**Borrowings  Validation (For Update Controller)**
+
+      php artisan make:request UpdateBorrowingRequest
+    
+- **INFO  Request [D:\LibSecure\library-management-api\app\Http\Requests\UpdateBorrowingRequest.php] created successfully.**
   
+- **Borrowings  Resource**
+
+      php artisan make:resource BorrowingResource
+
+- **INFO  Resource [D:\LibSecure\library-management-api\app\Http\Resources\BorrowingResource.php] created successfully.**
+
+ - **Route->api.php**
+
+        Route::apiResource('borrowings',BorrowingController::class);
+
+
+   
+  
+🔗 API Endpoints
+🤝 Borrowings API
+
+        | Method      | Description             | Endpoint                                    |
+        | ----------- | -----------------       | --------------------------------------      |
+        | GET         | Get all borrowings      | `http://127.0.0.1:8000/api/borrowings`      |
+        | POST        | Create a new borrowing  | `http://127.0.0.1:8000/api/borrowingss`     |
+        | GET         | Get borrowing by ID     | `http://127.0.0.1:8000/api/borrowings/{id}` |
+        | PUT / PATCH | Update borrowings       | `http://127.0.0.1:8000/api/borrowings/{id}` |
+        | DELETE      | Delete borrowings       | `http://127.0.0.1:8000/api/borrowings/{id}` |
+        
+🤝 Borrowings API 
+– Postman Preview    
+
+
+
+
+
+
 <h3 align="center">📍 API Endpoints</h3>
 
 ### 👤 Authors
