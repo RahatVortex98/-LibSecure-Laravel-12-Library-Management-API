@@ -391,27 +391,54 @@ You must add:
 
  - **Route->api.php**
 
-        Route::apiResource('borrowings',BorrowingController::class);
+        Route::apiResource('borrowings',BorrowingController::class)->only(['index','store','show']);
 
+        //return & overdue
+   
+        Route::post('borrowings/{borrowing}/return',[BorrowingController::class,'returnBook']);
+        Route::get('borrowings/overdue/list',[BorrowingController::class,'overdue']);
 
    
   
 🔗 API Endpoints
 🤝 Borrowings API
 
-        | Method      | Description             | Endpoint                                    |
-        | ----------- | -----------------       | --------------------------------------      |
-        | GET         | Get all borrowings      | `http://127.0.0.1:8000/api/borrowings`      |
-        | POST        | Create a new borrowing  | `http://127.0.0.1:8000/api/borrowingss`     |
-        | GET         | Get borrowing by ID     | `http://127.0.0.1:8000/api/borrowings/{id}` |
-        | PUT / PATCH | Update borrowings       | `http://127.0.0.1:8000/api/borrowings/{id}` |
-        | DELETE      | Delete borrowings       | `http://127.0.0.1:8000/api/borrowings/{id}` |
+        | Method | Description            | Endpoint                                            |
+        | ------ | ---------------------- | --------------------------------------------------- |
+        | GET    | Get all borrowings     | `http://127.0.0.1:8000/api/borrowings`              |
+        | POST   | Create a new borrowing | `http://127.0.0.1:8000/api/borrowings`              |
+        | GET    | Get borrowing by ID    | `http://127.0.0.1:8000/api/borrowings/{id}`         |
+        | POST   | Return a borrowed book | `http://127.0.0.1:8000/api/borrowings/{id}/return`  |
+        | GET    | Get overdue borrowings | `http://127.0.0.1:8000/api/borrowings/overdue/list` |
+
         
 🤝 Borrowings API 
 – Postman Preview    
+<table> <tr> <td align="center"><b>Create Borrowing</b></td> <td align="center"><b>Get All Borrowings</b></td> </tr> <tr> <td><img src="https://github.com/user-attachments/assets/e2c47b61-89fb-438c-8217-b6c603e28764" width="450"/></td> <td><img src="https://github.com/user-attachments/assets/e5847968-8e9a-401c-ac34-72c1b70abed1" width="450"/></td> </tr> <tr> <td align="center"><b>Get Borrowing By ID</b></td> <td align="center"><b>Return Borrowed Book</b></td> </tr> <tr> <td><img src="https://github.com/user-attachments/assets/a9b61a0d-fbdf-4874-928c-9e5cb4ef82c1" width="450"/></td> <td><img src="https://github.com/user-attachments/assets/8803ebdf-0c38-48db-ae38-bb9e5e0122b3" width="450"/></td> </tr> <tr> <td align="center" colspan="2"><b>Overdue Borrowings</b></td> </tr> <tr> <td colspan="2" align="center"> <img src="https://github.com/user-attachments/assets/c4b0b9d0-fe01-4bd0-b432-baa401f263a6" width="520"/> </td> </tr> </table>
 
 
+<h3>📉 Statistics</h3>
+ - **Route->api.php**
 
+         Route::get('statistics',function(){
+        return response()->json([
+            'total_books'=>\App\Models\Book::count(),
+            'total_authors'=>\App\Models\Author::count(),
+            'total_members'=>\App\Models\Member::count(),
+            'book_borrowed'=>\App\Models\Borrowing::where('status','borrowed')->count(),
+            'overdue_borrowings'=>\App\Models\Borrowing::where('status','overdue')->count(),
+        ]);
+– Postman Preview  
+<table align="center"> <tr> <td align="center"><b>Create Borrowing</b></td> </tr> <tr> <td align="center"> <img src="https://github.com/user-attachments/assets/37202174-cdb3-4007-b6ca-5fcbb801fc4b" width="520" /> </td> </tr> </table>
+
+
+<h3 align="center">🔐 Adding Authentication & Authorization</h3>
+
+- **Auth Controller**
+  
+        php artisan make:controller AuthController
+
+- **INFO  Controller [D:\LibSecure\library-management-api\app\Http\Controllers\AuthController.php] created successfully.**
 
 
 
