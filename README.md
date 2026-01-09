@@ -440,7 +440,10 @@ You must add:
 
 - **INFO  Controller [D:\LibSecure\library-management-api\app\Http\Controllers\AuthController.php] created successfully.**
 
+- **Route->api.php**
 
+      Route::post('/registration',[AuthController::class,'register']);
+      Route::post('/login',[AuthController::class,'login']);
 
 <h3 align="center">📍 API Endpoints</h3>
 
