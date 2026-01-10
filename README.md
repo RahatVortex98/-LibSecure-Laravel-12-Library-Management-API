@@ -1,4 +1,4 @@
-
+<h3> 📗📘📚 Library-Management-API </h3>
 
 <h3 align='center'>🌐 Introduction To Api </h3>
 
@@ -134,7 +134,7 @@ and in Request/StoreAuthorRequest/ :
         }
 
 
-<h3 align='center'>🛡️ Setup Sanctum and Setup</h3>  
+<h3 align='center'>Routes For Api</h3>  
 
 Commands:
 
@@ -429,7 +429,7 @@ You must add:
             'overdue_borrowings'=>\App\Models\Borrowing::where('status','overdue')->count(),
         ]);
 – Postman Preview  
-<table align="center"> <tr> <td align="center"><b>Create Borrowing</b></td> </tr> <tr> <td align="center"> <img src="https://github.com/user-attachments/assets/37202174-cdb3-4007-b6ca-5fcbb801fc4b" width="520" /> </td> </tr> </table>
+<table align="center"> <tr> <td align="center"><b>Statistics</b></td> </tr> <tr> <td align="center"> <img src="https://github.com/user-attachments/assets/37202174-cdb3-4007-b6ca-5fcbb801fc4b" width="520" /> </td> </tr> </table>
 
 
 <h3 align="center">🔐 Adding Authentication & Authorization</h3>
@@ -444,6 +444,202 @@ You must add:
 
       Route::post('/registration',[AuthController::class,'register']);
       Route::post('/login',[AuthController::class,'login']);
+- **Auth Resource**
+
+      php artisan make:resource UserResource
+
+- **INFO  Resource [D:\LibSecure\library-management-api\app\Http\Resources\UserResource.php] created successfully.**
+
+
+🔗 API Endpoints
+🔐 Auth API
+
+        | Method   | Endpoint            | Description                    |
+        | -------- | ------------------- | ------------------------------ |
+        | **POST** | `/api/registration` | Register a new user            |
+        | **POST** | `/api/login`        | Log in a user                  |
+        | **GET**  | `/api/logout`       | Log out the authenticated user |
+
+– Postman Preview  
+
+
+<table align="center">
+  <tr>
+    <td align="center">
+      <b>📝 User Registration</b><br><br>
+      <img
+        width="933"
+        height="574"
+        alt="User Registration API"
+        src="https://github.com/user-attachments/assets/937ce42c-ae9f-41d5-8b10-3ee4b2f09fc3"
+      />
+    </td>
+  </tr>
+</table>
+
+<br>
+
+<table align="center">
+  <tr>
+    <td align="center">
+      <b>🔑 User Login</b><br><br>
+      <img
+        width="935"
+        height="558"
+        alt="User Login API"
+        src="https://github.com/user-attachments/assets/ba1a9703-ee8d-4092-89b7-657197e622bc"
+      />
+    </td>
+  </tr>
+</table>
+
+<br>
+
+<table align="center">
+  <tr>
+    <td align="center">
+      <b>🚪 User Logout</b><br><br>
+      <img
+        width="926"
+        height="557"
+        alt="User Logout API"
+        src="https://github.com/user-attachments/assets/0e81cb57-801d-4196-809c-c584af81cd50"
+      />
+    </td>
+  </tr>
+</table>
+
+<h3 align="center">🔀 Adding Middleware🛡️Sanctum  </h3>
+
+ - **Route->api.php**
+
+       Route::middleware('auth:sanctum')->group( function(){
+
+               //add routes you want to give authorization.
+
+        });
+– Postman Preview  
+
+<table align="center">
+  <tr>
+    <td align="center">
+      <b>🚫 Unauthorized Request (No Token)</b><br><br>
+      <img
+        width="940"
+        height="608"
+        alt="Unauthorized Can't See Data"
+        src="https://github.com/user-attachments/assets/4b6d20bf-f909-4fc3-a1df-9a5ba4a5884f"
+      />
+    </td>
+  </tr>
+</table>
+
+<br>
+
+<table align="center">
+  <tr>
+    <td align="center">
+      <b>✅ Authorized Request (Token Provided)</b><br><br>
+      <img
+        width="935"
+        height="579"
+        alt="After Token Given"
+        src="https://github.com/user-attachments/assets/b894c38c-5332-4aa3-8fc2-7d551d6f5504"
+      />
+    </td>
+  </tr>
+</table>
+
+<h3 align="center">🌪️ API Versioning </h3>
+
+<h4>API versioning is a technique used to manage and release changes to an API in a controlled way, allowing multiple versions of the same API to exist simultaneously so that new changes do not break existing clients.</h4>
+<h4>
+    <ul>
+        <li>
+            ###APIs are consumed by:
+            - **Mobile apps**
+            - **Frontend websites**
+            - **Third-party services**
+        </li>
+        <li>
+            ###Once clients start using an API, you cannot freely change it because:
+            - ** Removing a field breaks clients**
+            - ** Changing response structure causes errors**
+            - ** Renaming endpoints crashes apps**
+        </li>
+        </ul>
+</h4>
+
+ - **Route->api.php**
+
+            Route::prefix('v1')->group(function () {
+
+                // Public routes
+                Route::post('/registration',[AuthController::class,'register']);
+                Route::post('/login',[AuthController::class,'login']);
+            
+                Route::get('statistics', function(){
+                    return response()->json([
+                        'total_books'=>\App\Models\Book::count(),
+                        'total_authors'=>\App\Models\Author::count(),
+                        'total_members'=>\App\Models\Member::count(),
+                        'book_borrowed'=>\App\Models\Borrowing::where('status','borrowed')->count(),
+                        'overdue_borrowings'=>\App\Models\Borrowing::where('status','overdue')->count(),
+                    ]);
+                });
+            
+                // Public resources (no auth)
+                Route::apiResource('books', BookController::class);
+                Route::apiResource('members', MemberController::class);
+                Route::apiResource('borrowings', BorrowingController::class)->only(['index','store','show']);
+            
+                // Borrowing-specific actions
+                Route::post('borrowings/{borrowing}/return', [BorrowingController::class,'returnBook']);
+                Route::get('borrowings/overdue/list', [BorrowingController::class,'overdue']);
+            
+                // Authenticated routes
+                Route::middleware('auth:sanctum')->group(function () {
+                    Route::apiResource('authors', AuthorController::class);
+                    Route::get('/logout', [AuthController::class,'logout']);
+                    Route::get('/user', function(Request $request) {
+                        return $request->user();
+                    });
+                });
+            });
+- **Future versions (v2, v3) can coexist:**
+
+            Route::prefix('v2')->group(function () {
+                // New controllers with updated logic
+            });
+
+
+- ** All routes now live under /api/v1/... **
+
+        | Method | Description      | Endpoint                         |
+        | ------ | ---------------- | -------------------------------- |
+        | POST   | Create user      | `/api/v1/registration`           |
+        | POST   | Login            | `/api/v1/login`                  |
+        | GET    | Get all books    | `/api/v1/books`                  |
+        | POST   | Create borrowing | `/api/v1/borrowings`             |
+        | POST   | Return borrowing | `/api/v1/borrowings/{id}/return` |
+
+<h4 align="center">🔎 Search / Filter Books & Members</h4>
+
+<table>
+<tr>
+    <td align="center"><b>Search / Filter Books</b></td>
+    <td align="center"><b>Search / Filter Members</b></td>
+</tr>
+<tr>
+    <td align="center">
+        <img src="https://github.com/user-attachments/assets/b5f2fac2-2594-49d7-a895-7671996f5eed" width="450"/>
+    </td>
+    <td align="center">
+        <img src="https://github.com/user-attachments/assets/b7bc2dea-113d-45c6-8fd6-d61e4046b3e8" width="450"/>
+    </td>
+</tr>
+</table>
+
 
 <h3 align="center">📍 API Endpoints</h3>
 
