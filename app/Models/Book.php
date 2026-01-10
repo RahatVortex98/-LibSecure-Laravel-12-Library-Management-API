@@ -26,47 +26,38 @@ class Book extends Model
 
 
 
-
-     public function author(){
-
+public function author()
+    {
         return $this->belongsTo(Author::class);
     }
 
-     public function borrowings(){
-
+    public function borrowings()
+    {
         return $this->hasMany(Borrowing::class);
     }
 
-
-
-    //decrease availble_copies
-
     public function borrow()
-{
-    if ($this->available_copies > 0 && $this->status === 'available') {
-        $this->decrement('available_copies');
+    {
+        if ($this->available_copies > 0) {
+            $this->decrement('available_copies');
 
-        if ($this->available_copies - 1 === 0) {
-            $this->update(['status' => 'not_available']);
+            if ($this->available_copies === 0) {
+                $this->update(['status' => 'not_available']);
+            }
         }
     }
-}
-
-
-    //increment availble_copies when
 
     public function returnBook()
-        {
-            if ($this->available_copies < $this->total_copies) {
-                $this->increment('available_copies');
-                $this->update(['status' => 'available']);
-            }
+    {
+        if ($this->available_copies < $this->total_copies) {
+            $this->increment('available_copies');
+            $this->update(['status' => 'available']);
         }
-
-        public function isAvailable(): bool
-            {
-                return $this->available_copies > 0 && $this->status === 'available';
-            }
+    }
+public function isAvailable(): bool
+{
+    return $this->available_copies > 0;
+}
 
 
 }

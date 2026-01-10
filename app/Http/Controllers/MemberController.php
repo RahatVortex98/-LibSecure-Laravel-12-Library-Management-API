@@ -10,9 +10,18 @@ use Illuminate\Http\Request;
 class MemberController extends Controller
 {
    
-    public function index()
+    public function index(Request $request)
     {
-       $members=Member::paginate(10);
+       $query=Member::with('activeBorrowings');
+
+       if($request->has('name')){
+        $query->where('name','like','%'.$request->name .'%');
+       }
+       //filter by status
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+       $members=$query->paginate(10);
        return MemberResource::collection($members);
     }
 
@@ -27,7 +36,8 @@ class MemberController extends Controller
 
  
     public function show(Member $member)
-    {
+    {   
+        $member->load('activeBorrowings');
         return new MemberResource($member);
     }
 
@@ -41,6 +51,14 @@ class MemberController extends Controller
 
     public function destroy(Member $member)
     {
+
+        //check if member has any browwings
+
+        if($member->activeBorrowings()->count()){
+            return response()->json([
+                'message'=>'Cannot delete member with active borrowings'
+            ]);
+        }
         $member->delete();
         return response()->json([
             'message'=>'Member has been removed'
